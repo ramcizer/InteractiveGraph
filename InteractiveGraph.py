@@ -25,13 +25,6 @@ n = len(df.columns)
 intervals = st.t.interval(confidence, n - 1, loc=mean_values, scale=std_values / np.sqrt(n))
 full_widths = intervals[1] - intervals[0]
 
-# In case to noramilise mean_values from 0 - 1. 
-# normalized_mean = []
-# for i, x in enumerate(mean_values): 
-#     # print(mean_values.min())
-#     zi = (x - mean_values.min()) / (mean_values.max() - mean_values.min())
-#     normalized_mean.append(zi)
-
 # Create a Normalize object to map mean_values to the range [0, 1]
 normalize = mcol.Normalize(vmin=mean_values.min(), vmax=mean_values.max())
 
@@ -51,7 +44,7 @@ plt.xticks(df.index)
 plt.xlabel("Years")
 
 # Add a color bar to show the color scale
-cbar = plt.colorbar(scalarmappable)
+cbar = fig.colorbar(scalarmappable, ax=ax)
 cbar.set_label('Mean Value')
 
 clicked_positions = []  # Store clicked y-coordinates
